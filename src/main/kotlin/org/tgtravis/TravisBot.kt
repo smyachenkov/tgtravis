@@ -7,6 +7,7 @@ import org.telegram.telegrambots.ApiContextInitializer
 import org.telegram.telegrambots.TelegramBotsApi
 import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
+import org.tgtravis.event.CommandEvent
 import java.io.File
 
 class TravisBot(private val config: BotConfig): TelegramLongPollingBot() {
@@ -16,7 +17,9 @@ class TravisBot(private val config: BotConfig): TelegramLongPollingBot() {
     override fun getBotUsername(): String = config.username
 
     override fun onUpdateReceived(update: Update) {
-        TODO("not implemented")
+        if (update.message.isCommand) {
+            CommandEvent.newEvent(this, update.message).process()
+        }
     }
 }
 
