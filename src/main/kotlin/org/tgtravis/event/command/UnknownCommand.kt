@@ -5,8 +5,7 @@ import org.telegram.telegrambots.api.objects.Message
 import org.telegram.telegrambots.bots.AbsSender
 
 class UnknownCommand(bot: AbsSender,
-                     message: Message,
-                     command: String = "unknown") : BasicCommand(bot, message, command) {
+                     message: Message) : BasicCommand(bot, message, "unknown") {
     override fun process() {
         bot.execute(SendMessage(message.chatId, "I don't know this command"))
     }

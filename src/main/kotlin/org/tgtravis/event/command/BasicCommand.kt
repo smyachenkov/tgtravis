@@ -5,8 +5,11 @@ import org.telegram.telegrambots.bots.AbsSender
 
 abstract class BasicCommand(val bot: AbsSender,
                             val message: Message,
-                            val command: String) : Command {
-    fun params(): List<String> {
+                            protected val command: String) : Command {
+
+    protected val params : List<String> = retrieveParams()
+
+    private fun retrieveParams(): List<String> {
         val prefix = "/$command"
         return if (prefix == message.text)
             emptyList()
