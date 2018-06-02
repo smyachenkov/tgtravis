@@ -1,13 +1,13 @@
 package org.tgtravis.event.command
 
-import org.junit.jupiter.api.Test
 import org.mockito.Matchers
 import org.mockito.Mockito.*
 import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.Message
 import org.telegram.telegrambots.bots.AbsSender
+import kotlin.test.Test
 
-internal class HelloCommandTest {
+class HelloCommandTest {
 
     @Test
     fun respondsToStartMessage() {

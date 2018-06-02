@@ -1,14 +1,14 @@
 package org.tgtravis.event.command
 
-import org.junit.jupiter.api.Test
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.telegram.telegrambots.api.objects.Message
 import org.telegram.telegrambots.bots.AbsSender
+import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
-internal class BasicCommandTest {
+class BasicCommandTest {
 
     private class TestCommand(bot: AbsSender,
                               message: Message) : BasicCommand(bot, message, "test") {
