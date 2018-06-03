@@ -5,12 +5,12 @@ import org.mockito.Mockito.*
 import org.telegram.telegrambots.api.methods.send.SendMessage
 import kotlin.test.Test
 
-class HelloCommandTest : AbstractCommandTest() {
+class AddRepoCommandTest : AbstractCommandTest() {
 
     @Test
-    fun respondsToStartMessage() {
-        mockMessage("start")
-        val command = HelloCommand(bot, message)
+    fun respondsWithSuccess() {
+        mockMessage("repo")
+        val command = AddRepoCommand(bot, message)
         command.process()
         verify(bot).execute(SendMessage(message.chatId, Matchers.anyString()))
     }
