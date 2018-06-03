@@ -5,10 +5,10 @@ import org.telegram.telegrambots.api.objects.Message
 import org.telegram.telegrambots.bots.AbsSender
 import org.tgtravis.storage.RepoStorage
 
-class AddRepoCommand(bot: AbsSender,
-                     message: Message) : BasicCommand(bot, message, "add") {
+class ClearReposCommand(bot: AbsSender,
+                        message: Message) : BasicCommand(bot, message, "clear") {
     override fun process() {
-        RepoStorage.add(message.from.id, params)
-        bot.execute(SendMessage(message.chatId, "Added!"))
+        RepoStorage.clear(message.from.id)
+        bot.execute(SendMessage(message.chatId, "Cleared!"))
     }
 }

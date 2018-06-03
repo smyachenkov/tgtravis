@@ -2,10 +2,7 @@ package org.tgtravis.event
 
 import org.telegram.telegrambots.api.objects.Message
 import org.telegram.telegrambots.bots.AbsSender
-import org.tgtravis.event.command.AddRepoCommand
-import org.tgtravis.event.command.Command
-import org.tgtravis.event.command.HelloCommand
-import org.tgtravis.event.command.UnknownCommand
+import org.tgtravis.event.command.*
 
 abstract class CommandEvent private constructor() {
     companion object {
@@ -15,6 +12,9 @@ abstract class CommandEvent private constructor() {
             return when (command) {
                 "start" -> HelloCommand(bot, message)
                 "add" -> AddRepoCommand(bot, message)
+                "list" -> ListRepoCommand(bot, message)
+                "remove" -> RemoveRepoCommand(bot, message)
+                "clear" -> ClearReposCommand(bot, message)
                 else -> UnknownCommand(bot, message)
             }
         }
