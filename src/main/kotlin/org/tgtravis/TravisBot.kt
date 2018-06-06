@@ -1,16 +1,14 @@
 package org.tgtravis
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
-import com.fasterxml.jackson.module.kotlin.KotlinModule
-import org.telegram.telegrambots.ApiContextInitializer
-import org.telegram.telegrambots.TelegramBotsApi
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
+import org.tgtravis.configuration.TravisBotConfiguration
 import org.tgtravis.event.CommandEvent
-import java.io.File
 
-class TravisBot(private val config: BotConfig): TelegramLongPollingBot() {
+@Component
+class TravisBot @Autowired constructor(private val config : TravisBotConfiguration) : TelegramLongPollingBot() {
 
     override fun getBotToken(): String = config.token
 
@@ -22,14 +20,3 @@ class TravisBot(private val config: BotConfig): TelegramLongPollingBot() {
         }
     }
 }
-
-fun main(args: Array<String>) {
-    ApiContextInitializer.init()
-    val mapper = ObjectMapper(YAMLFactory())
-    mapper.registerModule(KotlinModule())
-    val config = mapper.readValue(File("config.yaml"), BotConfig::class.java)
-    val api = TelegramBotsApi()
-    api.registerBot(TravisBot(config))
-}
-
-data class BotConfig(val username: String, val token: String)
