@@ -1,3 +1,15 @@
 bot:
-  username : [BOT_USERNAME]
-  token : [BOT_TOKEN]
+  username: [BOT_USERNAME]
+  token: [BOT_TOKEN]
+
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:file:./travisdb;DB_CLOSE_ON_EXIT=FALSE;
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update

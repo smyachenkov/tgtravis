@@ -51,6 +51,10 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
             <version>${jackson.version}</version>
@@ -79,6 +83,12 @@
             <groupId>org.iq80.leveldb</groupId>
             <artifactId>leveldb</artifactId>
             <version>0.10</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.196</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
