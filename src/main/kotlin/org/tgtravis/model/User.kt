@@ -6,9 +6,9 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Column
 import javax.persistence.ManyToMany
-import javax.persistence.CascadeType
 import javax.persistence.JoinTable
 import javax.persistence.JoinColumn
+import javax.persistence.FetchType
 
 @Entity
 data class User(
@@ -17,18 +17,18 @@ data class User(
     val id: Long? = 0,
 
     @Column(unique = true, nullable = false)
-    var telegramId: Long,
+    var telegramId: Long = 0,
 
     @Column(nullable = true)
-    var telegramUserName: String?,
+    var telegramUserName: String? = "",
 
-    @ManyToMany(cascade = [CascadeType.ALL])
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "UserRepos",
             joinColumns = [JoinColumn(name = "user_id")],
             inverseJoinColumns = [(JoinColumn(name = "repo_id"))]
     )
-    var repos: Set<Repo>?
+    var repos: Set<Repo>? = HashSet()
 
 ) {
     constructor(telegramId: Long, telegramUserName: String?) : this(null, telegramId, telegramUserName, null)

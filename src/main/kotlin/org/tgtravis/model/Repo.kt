@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Column
 import javax.persistence.ManyToMany
+import javax.persistence.FetchType
 
 @Entity
 data class Repo(
@@ -14,10 +15,10 @@ data class Repo(
     val id: Long? = 0,
 
     @Column(unique = true, nullable = false)
-    var name: String,
+    var name: String = "",
 
-    @ManyToMany(mappedBy = "repos")
-    var users: Set<User>?
+    @ManyToMany(mappedBy = "repos", fetch = FetchType.EAGER)
+    var users: Set<User>? = HashSet()
 
 ) {
     constructor(name: String) : this(null, name, null)
