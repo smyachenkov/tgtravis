@@ -14,10 +14,10 @@ data class Repo(
     val id: Long? = 0,
 
     @Column(unique = true, nullable = false)
-    val name: String,
+    var name: String,
 
     @ManyToMany(mappedBy = "repos")
-    val users: List<User>?
+    var users: Set<User>?
 
 ) {
     constructor(name: String) : this(null, name, null)

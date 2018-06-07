@@ -17,10 +17,10 @@ data class User(
     val id: Long? = 0,
 
     @Column(unique = true, nullable = false)
-    val telegramId: Long,
+    var telegramId: Long,
 
     @Column(nullable = true)
-    val telegramUserName: String?,
+    var telegramUserName: String?,
 
     @ManyToMany(cascade = [CascadeType.ALL])
     @JoinTable(
@@ -28,7 +28,7 @@ data class User(
             joinColumns = [JoinColumn(name = "user_id")],
             inverseJoinColumns = [(JoinColumn(name = "repo_id"))]
     )
-    val repos: List<User>?
+    var repos: Set<Repo>?
 
 ) {
     constructor(telegramId: Long, telegramUserName: String?) : this(null, telegramId, telegramUserName, null)
