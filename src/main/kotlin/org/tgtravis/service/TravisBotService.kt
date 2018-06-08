@@ -7,21 +7,20 @@ import org.tgtravis.model.Repo
 import org.tgtravis.model.User
 import org.tgtravis.repository.RepoRepository
 import org.tgtravis.repository.UserRepository
-import java.util.*
 
 @Service
 class TravisBotService @Autowired constructor(private val repos: RepoRepository,
                                               private val users: UserRepository) {
 
-    fun retrieveUser(message: Message) : User {
-        val existing = users.findByTelegramId((message.from.id.toLong()))
+    fun retrieveUser(message: Message): User {
+        val existing = users.findByTelegramId(message.from.id.toLong())
         return if (existing.isPresent)
             existing.get()
         else
             users.save(User(message.from.id.toLong(), message.from.userName))
     }
 
-    fun retrieveRepo(name: String) : Repo {
+    fun retrieveRepo(name: String): Repo {
         val existing = repos.findByName(name)
         return if (existing.isPresent)
             existing.get()
@@ -29,7 +28,7 @@ class TravisBotService @Autowired constructor(private val repos: RepoRepository,
             repos.save(Repo(name))
     }
 
-    fun retrieveRepos(names: Set<String>) : Set<Repo> = names.map { retrieveRepo(it) }.toSet()
+    fun retrieveRepos(names: Set<String>): Set<Repo> = names.map { retrieveRepo(it) }.toSet()
 
     fun addRepos(user: User, repos: Set<Repo>) {
         if (repos.isEmpty())
@@ -42,6 +41,7 @@ class TravisBotService @Autowired constructor(private val repos: RepoRepository,
         }
         val updated = current.toMutableSet()
         updated.addAll(repos)
+        user.repos = updated
         users.save(user)
     }
 
