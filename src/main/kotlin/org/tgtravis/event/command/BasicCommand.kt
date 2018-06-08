@@ -1,13 +1,16 @@
 package org.tgtravis.event.command
 
 import org.telegram.telegrambots.api.objects.Message
-import org.telegram.telegrambots.bots.AbsSender
+import org.tgtravis.TravisBot
+import org.tgtravis.model.User
 
-abstract class BasicCommand(val bot: AbsSender,
+abstract class BasicCommand(val bot: TravisBot,
                             val message: Message,
                             protected val command: String) : Command {
 
-    protected val params : List<String> = retrieveParams()
+    protected val params: List<String> = retrieveParams()
+
+    protected val user: User = bot.service.retrieveUser(message)
 
     private fun retrieveParams(): List<String> {
         val prefix = "/$command"
@@ -16,7 +19,7 @@ abstract class BasicCommand(val bot: AbsSender,
         else
             message.text.removePrefix(prefix)
                     .trim()
-                    .replace("\\s+".toRegex()," ")
+                    .replace("\\s+".toRegex(), " ")
                     .split(" ")
     }
 }
