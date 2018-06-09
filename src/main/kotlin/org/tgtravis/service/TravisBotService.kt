@@ -9,8 +9,7 @@ import org.tgtravis.repository.RepoRepository
 import org.tgtravis.repository.UserRepository
 
 @Service
-class TravisBotService @Autowired constructor(private val repos: RepoRepository,
-                                              private val users: UserRepository) {
+class TravisBotService @Autowired constructor(private val repos: RepoRepository, private val users: UserRepository) {
 
     fun retrieveUser(message: Message): User {
         val existing = users.findByTelegramId(message.from.id.toLong())

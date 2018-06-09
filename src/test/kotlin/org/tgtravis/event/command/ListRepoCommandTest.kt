@@ -1,6 +1,7 @@
 package org.tgtravis.event.command
 
-import org.mockito.Mockito.*
+import org.mockito.Mockito.spy
+import org.mockito.Mockito.verify
 import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.tgtravis.model.Repo
 import org.tgtravis.model.User

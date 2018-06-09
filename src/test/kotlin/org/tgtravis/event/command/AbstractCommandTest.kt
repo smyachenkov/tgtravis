@@ -32,5 +32,4 @@ abstract class AbstractCommandTest {
     fun mockUser(user: org.tgtravis.model.User) {
         `when`(service.retrieveUser(message)).thenReturn(user)
     }
-
 }

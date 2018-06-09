@@ -1,12 +1,17 @@
 package org.tgtravis.service
 
-import org.mockito.Mockito.*
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.atMost
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.never
+import org.mockito.Mockito.spy
+import org.mockito.Mockito.verify
 import org.telegram.telegrambots.api.objects.Message
 import org.tgtravis.model.Repo
 import org.tgtravis.model.User
 import org.tgtravis.repository.RepoRepository
 import org.tgtravis.repository.UserRepository
-import java.util.*
+import java.util.Optional
 import java.util.concurrent.ThreadLocalRandom
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -88,7 +93,6 @@ class TravisBotServiceTest {
         verify(users, never()).save(user)
         assertEquals(0, user.repos.size, "must ignore empty user repo list")
     }
-
 
     @Test
     fun clearReposRemovesOnlyPresentRepos() {

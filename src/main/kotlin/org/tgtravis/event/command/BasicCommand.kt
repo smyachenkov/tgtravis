@@ -5,9 +5,7 @@ import org.telegram.telegrambots.api.objects.Message
 import org.tgtravis.TravisBot
 import org.tgtravis.model.User
 
-abstract class BasicCommand(val bot: TravisBot,
-                            val message: Message,
-                            protected val command: String) : Command {
+abstract class BasicCommand(val bot: TravisBot, val message: Message, protected val command: String) : Command {
 
     protected val params: List<String> = retrieveParams()
 
