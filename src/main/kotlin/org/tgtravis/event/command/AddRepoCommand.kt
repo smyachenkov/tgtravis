@@ -1,14 +1,13 @@
 package org.tgtravis.event.command
 
-import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.Message
-import org.telegram.telegrambots.bots.AbsSender
-import org.tgtravis.storage.RepoStorage
+import org.tgtravis.TravisBot
 
-class AddRepoCommand(bot: AbsSender,
+class AddRepoCommand(bot: TravisBot,
                      message: Message) : BasicCommand(bot, message, "add") {
     override fun process() {
-        RepoStorage.add(message.from.id, params)
-        bot.execute(SendMessage(message.chatId, "Added!"))
+        val newRepos = bot.service.retrieveRepos(params.toSet())
+        bot.service.addRepos(user, newRepos)
+        respond("Added!")
     }
 }
