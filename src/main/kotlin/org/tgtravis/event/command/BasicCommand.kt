@@ -1,5 +1,6 @@
 package org.tgtravis.event.command
 
+import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.Message
 import org.tgtravis.TravisBot
 import org.tgtravis.model.User
@@ -21,5 +22,10 @@ abstract class BasicCommand(val bot: TravisBot,
                     .trim()
                     .replace("\\s+".toRegex(), " ")
                     .split(" ")
+    }
+
+    override fun respond(text: String) {
+        val response = SendMessage(message.chatId, text)
+        bot.execute(response)
     }
 }
