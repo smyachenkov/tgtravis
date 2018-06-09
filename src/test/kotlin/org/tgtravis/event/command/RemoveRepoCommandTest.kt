@@ -1,8 +1,7 @@
 package org.tgtravis.event.command
 
-import org.mockito.Matchers
-import org.mockito.Mockito.*
-import org.telegram.telegrambots.api.methods.send.SendMessage
+import org.mockito.Mockito
+import org.mockito.Mockito.verify
 import kotlin.test.Test
 
 class RemoveRepoCommandTest : AbstractCommandTest() {
@@ -10,8 +9,8 @@ class RemoveRepoCommandTest : AbstractCommandTest() {
     @Test
     fun respondsWithSuccess() {
         mockMessage("remove")
-        val command = RemoveRepoCommand(bot, message)
+        val command = Mockito.spy(RemoveRepoCommand(bot, message))
         command.process()
-        verify(bot).execute(SendMessage(message.chatId, Matchers.anyString()))
+        verify(command).respond(Mockito.anyString())
     }
 }

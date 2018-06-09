@@ -1,16 +1,23 @@
 package org.tgtravis.event.command
 
 import org.mockito.Mockito.*
-import org.telegram.telegrambots.api.methods.send.SendMessage
 import kotlin.test.Test
 
 class UnknownCommandTest : AbstractCommandTest() {
 
     @Test
-    fun respondsToAnyUnknownMessage() {
+    fun respondsToUnknownCommand() {
         mockMessage("unknown")
-        val command = UnknownCommand(bot, message)
+        val command = spy(UnknownCommand(bot, message))
         command.process()
-        verify(bot).execute(SendMessage(message.chatId, "I don't know this command"))
+        verify(command).respond(anyString())
+    }
+
+    @Test
+    fun respondsToUnknownCommandWithParams() {
+        mockMessage("unknown param1 param2")
+        val command = spy(UnknownCommand(bot, message))
+        command.process()
+        verify(command).respond(anyString())
     }
 }

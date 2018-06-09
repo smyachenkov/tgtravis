@@ -2,7 +2,8 @@ package org.tgtravis.event.command
 
 import org.mockito.Mockito.*
 import org.telegram.telegrambots.api.methods.send.SendMessage
-import org.tgtravis.storage.RepoStorage
+import org.tgtravis.model.Repo
+import org.tgtravis.model.User
 import kotlin.test.Test
 
 class ListRepoCommandTest : AbstractCommandTest() {
@@ -10,17 +11,20 @@ class ListRepoCommandTest : AbstractCommandTest() {
     @Test
     fun respondsToUserWithoutRepos() {
         mockMessage("list")
-        val command = ListRepoCommand(bot, message)
+        val command = spy(ListRepoCommand(bot, message))
         command.process()
-        verify(bot).execute(SendMessage(message.chatId, "You don't have any repositories in watchlist"))
+        verify(bot).execute(SendMessage(message.chatId, "Your current watchlist: "))
     }
 
     @Test
     fun respondsToUserWithRepos() {
-        RepoStorage.add(userId, listOf("repo1"))
         mockMessage("list")
+        val user = User(1, "user")
+        user.repos = setOf(Repo("repo1"), Repo("repo2"))
+        mockUser(user)
         val command = ListRepoCommand(bot, message)
         command.process()
-        verify(bot).execute(SendMessage(message.chatId, listOf("repo1").joinToString(", ")))
+        verify(bot).execute(SendMessage(message.chatId,
+                "Your current watchlist: ${listOf("repo1", "repo2").joinToString(", ")}"))
     }
 }

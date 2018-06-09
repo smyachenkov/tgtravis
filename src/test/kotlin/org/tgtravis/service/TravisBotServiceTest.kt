@@ -11,7 +11,6 @@ import java.util.concurrent.ThreadLocalRandom
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-
 class TravisBotServiceTest {
 
     private val repos = mock(RepoRepository::class.java)
@@ -130,7 +129,7 @@ class TravisBotServiceTest {
         val user = User(ThreadLocalRandom.current().nextLong())
         user.repos = mutableSetOf(Repo("repo1"), Repo("repo2"))
         service.clear(user)
-        verify(users).save(argThat { user.repos.isEmpty() })
+        assertEquals(0, user.repos.size, "must remove all repos from user")
     }
 
     private fun mockMessage(id: Int, username: String?): Message {
