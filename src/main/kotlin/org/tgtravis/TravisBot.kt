@@ -9,8 +9,7 @@ import org.tgtravis.event.CommandEvent
 import org.tgtravis.service.TravisBotService
 
 @Component
-class TravisBot @Autowired constructor(private val config: TravisBotConfiguration,
-                                       val service: TravisBotService) : TelegramLongPollingBot() {
+class TravisBot @Autowired constructor(private val config: TravisBotConfiguration, val service: TravisBotService) : TelegramLongPollingBot() {
 
     override fun getBotToken(): String = config.token
 

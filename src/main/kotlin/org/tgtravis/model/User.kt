@@ -42,8 +42,8 @@ data class User(
         if (this === other) return true
         if (this::class !== other!!::class) return false
         other as User
-        return this.id == other.id
-                && this.telegramId == other.telegramId
-                && this.telegramUserName == other.telegramUserName
+        return this.id == other.id &&
+                this.telegramId == other.telegramId &&
+                this.telegramUserName == other.telegramUserName
     }
 }

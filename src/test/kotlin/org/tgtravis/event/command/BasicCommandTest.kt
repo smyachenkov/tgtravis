@@ -8,12 +8,11 @@ import kotlin.test.assertNotNull
 
 class BasicCommandTest : AbstractCommandTest() {
 
-    private class TestCommand(bot: TravisBot,
-                              message: Message) : BasicCommand(bot, message, "test") {
+    private class TestCommand(bot: TravisBot, message: Message) : BasicCommand(bot, message, "test") {
 
         override fun process() {}
 
-        fun checkParams() : List<String> {
+        fun checkParams(): List<String> {
             return params
         }
     }
