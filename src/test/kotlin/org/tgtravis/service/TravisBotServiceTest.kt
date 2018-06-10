@@ -144,6 +144,24 @@ class TravisBotServiceTest {
         assertEquals(0, user.repos.size, "must remove all repos from user")
     }
 
+    @Test
+    fun retrieveUsersByRepoFindsUsers() {
+        val users = setOf(User(1), User(2))
+        val repo = Repo("repo")
+        repo.users = users
+        `when`(repos.findByName("repo")).thenReturn(Optional.of(repo))
+        assertEquals(users, service.retrieveUsers("repo"),
+                "must return all users of found repo")
+    }
+
+    @Test
+    fun retrieveUsersByRepoReturnsEmptySetIfNotFound() {
+        val repo = Repo("repo")
+        `when`(repos.findByName("repo")).thenReturn(Optional.of(repo))
+        assertEquals(emptySet(), service.retrieveUsers("repo"),
+                "must return empty set when nobody's watching repo")
+    }
+
     private fun mockMessage(id: Int, username: String?): Message {
         val message = mock(Message::class.java)
         val from = mock(org.telegram.telegrambots.api.objects.User::class.java)

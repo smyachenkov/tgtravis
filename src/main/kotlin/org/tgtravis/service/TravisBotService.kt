@@ -63,4 +63,9 @@ class TravisBotService
         user.repos = mutableSetOf()
         users.save(user)
     }
+
+    fun retrieveUsers(repoName: String): Set<User> {
+        val repo = repos.findByName(repoName)
+        return if (repo.isPresent) repo.get().users else emptySet()
+    }
 }

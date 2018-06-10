@@ -1,6 +1,7 @@
 package org.tgtravis.event.command
 
-interface Command {
-    fun process()
+import org.tgtravis.event.Event
+
+interface Command : Event {
     fun respond(text: String)
 }
