@@ -14,8 +14,12 @@ import javax.annotation.PostConstruct
  */
 
 @Configuration
-open class TelegramBotStarterConfiguration @Autowired constructor(longPollingBots: List<LongPollingBot>?, webHookBots: List<WebhookBot>?) {
+open class TelegramBotStarterConfiguration
 
+@Autowired constructor(
+    longPollingBots: List<LongPollingBot>?,
+    webHookBots: List<WebhookBot>?
+) {
     private val longPollingBots: List<LongPollingBot> = longPollingBots.orEmpty()
     private val webHookBots: List<WebhookBot> = webHookBots.orEmpty()
 

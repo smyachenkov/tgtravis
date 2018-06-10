@@ -39,7 +39,8 @@ class TravisBotServiceTest {
         val message = mockMessage(id, null)
         `when`(users.findByTelegramId(message.from.id.toLong())).thenReturn(Optional.empty())
         `when`(users.save(User(id.toLong(), null))).thenReturn(User(id.toLong(), null))
-        assertEquals(User(id.toLong(), null), service.retrieveUser(message), "must create new user if not found")
+        assertEquals(User(id.toLong(), null), service.retrieveUser(message),
+                "must create new user if not found")
     }
 
     @Test
@@ -47,7 +48,8 @@ class TravisBotServiceTest {
         val name = "repo"
         val repo = Repo(name)
         `when`(repos.findByName(name)).thenReturn(Optional.of(repo))
-        assertEquals(Repo(name), service.retrieveRepo(name), "must return existing repo")
+        assertEquals(Repo(name), service.retrieveRepo(name),
+                "must return existing repo")
     }
 
     @Test
@@ -55,7 +57,8 @@ class TravisBotServiceTest {
         val name = "repo"
         `when`(repos.findByName(name)).thenReturn(Optional.empty())
         `when`(repos.save(Repo(name))).thenReturn(Repo(name))
-        assertEquals(Repo(name), service.retrieveRepo(name), "must create new repo if not not found")
+        assertEquals(Repo(name), service.retrieveRepo(name),
+                "must create new repo if not not found")
     }
 
     @Test
@@ -64,7 +67,8 @@ class TravisBotServiceTest {
         `when`(repos.findByName("repo1")).thenReturn(Optional.of(Repo("repo1")))
         `when`(repos.findByName("repo2")).thenReturn(Optional.of(Repo("repo2")))
         val result = service.retrieveRepos(input)
-        assertEquals(2, result.size, "must contain all repos")
+        assertEquals(2, result.size,
+                "must contain all repos")
     }
 
     @Test
@@ -73,7 +77,8 @@ class TravisBotServiceTest {
         user.repos = mutableSetOf(Repo("repo1"), Repo("repo2"))
         service.addRepos(user, emptySet())
         verify(users, never()).save(user)
-        assertEquals(2, user.repos.size, "must not change repo list with empty set on input")
+        assertEquals(2, user.repos.size,
+                "must not change repo list with empty set on input")
     }
 
     @Test
@@ -82,7 +87,8 @@ class TravisBotServiceTest {
         user.repos = mutableSetOf(Repo("repo1"), Repo("repo2"))
         service.removeRepos(user, setOf())
         verify(users, never()).save(user)
-        assertEquals(2, user.repos.size, "must ignore empty input set")
+        assertEquals(2, user.repos.size,
+                "must ignore empty input set")
     }
 
     @Test
@@ -91,7 +97,8 @@ class TravisBotServiceTest {
         user.repos = mutableSetOf()
         service.removeRepos(user, setOf(Repo("repo1"), Repo("repo2")))
         verify(users, never()).save(user)
-        assertEquals(0, user.repos.size, "must ignore empty user repo list")
+        assertEquals(0, user.repos.size,
+                "must ignore empty user repo list")
     }
 
     @Test
@@ -101,7 +108,8 @@ class TravisBotServiceTest {
         service.removeRepos(user, setOf(Repo("repo2"), Repo("repo3"), Repo("repo999")))
         verify(users, atMost(1)).save(user)
         assertEquals(1, user.repos.size, "must remove only present in input repos")
-        assertEquals(true, user.repos.contains(Repo("repo1")), "must remove only present in input repos")
+        assertEquals(true, user.repos.contains(Repo("repo1")),
+                "must remove only present in input repos")
     }
 
     @Test
