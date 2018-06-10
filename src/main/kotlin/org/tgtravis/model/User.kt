@@ -32,7 +32,8 @@ data class User(
     var repos: Set<Repo> = mutableSetOf<Repo>()
 
 ) {
-    constructor(telegramId: Long, telegramUserName: String?) : this(null, telegramId, telegramUserName, mutableSetOf())
+    constructor(telegramId: Long, telegramUserName: String?) :
+            this(null, telegramId, telegramUserName, mutableSetOf())
 
     override fun toString(): String = "$id $telegramId $telegramUserName"
 

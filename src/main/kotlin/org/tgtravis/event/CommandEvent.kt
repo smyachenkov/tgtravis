@@ -14,7 +14,8 @@ abstract class CommandEvent private constructor() {
     companion object {
         fun newEvent(bot: TravisBot, message: Message): Command {
             val text = message.text
-            val command = text.substring(1, if (text.contains(' ')) text.indexOf(' ') else text.length)
+            val command = text.substring(1,
+                    if (text.contains(' ')) text.indexOf(' ') else text.length)
             return when (command) {
                 "start" -> HelloCommand(bot, message)
                 "add" -> AddRepoCommand(bot, message)
