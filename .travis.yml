@@ -1,3 +1,5 @@
 language: java
 after_success:
 - bash <(curl -s https://codecov.io/bash)
+notifications:
+  webhooks: https://webhook.site/c7caad07-ac75-4840-b7fa-9a2e55ba43ac
