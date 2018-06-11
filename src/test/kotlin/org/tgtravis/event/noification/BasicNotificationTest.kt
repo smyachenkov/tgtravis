@@ -1,6 +1,5 @@
 package org.tgtravis.event.noification
 
-import org.junit.jupiter.api.Test
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.never
@@ -9,6 +8,7 @@ import org.mockito.Mockito.verify
 import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.tgtravis.TravisBot
 import org.tgtravis.model.User
+import kotlin.test.Test
 
 class BasicNotificationTest {
 
