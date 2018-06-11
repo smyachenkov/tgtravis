@@ -156,8 +156,7 @@ class TravisBotServiceTest {
 
     @Test
     fun retrieveUsersByRepoReturnsEmptySetIfNotFound() {
-        val repo = Repo("repo")
-        `when`(repos.findByName("repo")).thenReturn(Optional.of(repo))
+        `when`(repos.findByName("repo")).thenReturn(Optional.empty())
         assertEquals(emptySet(), service.retrieveUsers("repo"),
                 "must return empty set when nobody's watching repo")
     }
