@@ -14,7 +14,7 @@ class BuildNotification(
             "Result: *%s*\n" +
             "Author: %s %s\n" +
             "Committer: %s %s\n" +
-            "Committed at: %s\n" +
+            "Committed at: *%s*\n" +
             "Started at: %s\n" +
             "Duration: %s\n" +
             "Finished at: %s\n"
